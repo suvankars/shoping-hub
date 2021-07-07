@@ -1,10 +1,5 @@
 import styled from "styled-components";
-
-const Button = styled.button<{ primary: boolean }>`
-  background-color: rgb(33, 206, 140);
-  font-size: larger;
-  color: ${(props) => (props.primary ? "white" : "black")};
-`;
+import Directory from "../../components/directory";
 
 const HomePageWrapper = styled.div`
   display: flex;
@@ -16,7 +11,7 @@ const HomePageWrapper = styled.div`
 export default function home() {
   return (
     <HomePageWrapper>
-      <Button primary>Click me</Button>
+      <Directory/>
     </HomePageWrapper>
   );
 }
