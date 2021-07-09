@@ -1,18 +1,19 @@
 import React from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
-interface Items {
+interface Items extends RouteComponentProps<any> {
   title: String;
   key: number;
   imageUrl: string;
+  linkUrl: string;
 }
 
-export default function MenuItem(props: Items) {
-  console.log(props.imageUrl);
+const MenuItem = ({imageUrl, history, linkUrl, title, match}: Items) =>{
   return (
-    <MenuItemWraper imageUrl={props.imageUrl}>
-      <ContentWrapper>
-        <TitleWrapper>{props.title}</TitleWrapper>
+    <MenuItemWraper imageUrl={imageUrl}>
+      <ContentWrapper onClick={()=>{history.push(`${match.url}${linkUrl}`)}}>
+        <TitleWrapper>{title}</TitleWrapper>
         <SubTitleWrapper>SHOP NOW</SubTitleWrapper>
       </ContentWrapper>
     </MenuItemWraper>
@@ -57,3 +58,5 @@ const TitleWrapper = styled.div`
 const SubTitleWrapper = styled.div`
 font-weight: lighter;
 font-size: 16px;`;
+
+export default withRouter(MenuItem);

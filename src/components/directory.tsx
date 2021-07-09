@@ -11,12 +11,12 @@ const DirectoryWrapper = styled.div`
 `;
 
 const Directory = () => {
-    const [sections, setSections] = useState(sectionsData)
+    const [sections] = useState(sectionsData)
     console.log(sections);
     return (
         <DirectoryWrapper>
-        {sections.map( ({title, id, imageUrl}) => (
-            <MenuItem title={title} key={id} imageUrl={imageUrl}></MenuItem>
+        {sections.map( ({id, ...otherSections}) => (
+            <MenuItem {...otherSections} key={id} ></MenuItem>
         ))}
       </DirectoryWrapper>
     )
