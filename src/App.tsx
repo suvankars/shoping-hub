@@ -3,10 +3,12 @@ import { Route, Switch } from "react-router";
 
 import ShopPage from "./pages/shop/shoppage";
 import styled from "styled-components";
+import Header from "./components/Header";
 
 export const App = () => {
   return (
     <AppWraper>
+      <Header />
       <Switch>
         <Route exact path="/">
           <Home />
@@ -20,7 +22,11 @@ export const App = () => {
 };
 
 const AppWraper = styled.div`
-padding: 20px 60px;
+  padding: 20px 60px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 export default App;
