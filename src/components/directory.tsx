@@ -12,7 +12,6 @@ const DirectoryWrapper = styled.div`
 
 const Directory = () => {
     const [sections] = useState(sectionsData)
-    console.log(sections);
     return (
         <DirectoryWrapper>
         {sections.map( ({id, ...otherSections}) => (
@@ -23,5 +22,3 @@ const Directory = () => {
 }
 
 export default Directory
-
-
