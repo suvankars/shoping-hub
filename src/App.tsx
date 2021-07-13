@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router";
 import ShopPage from "./pages/shop/shoppage";
 import styled from "styled-components";
 import Header from "./components/Header";
+import Auth from './pages/authentication/auth'
 
 export const App = () => {
   return (
@@ -15,6 +16,9 @@ export const App = () => {
         </Route>
         <Route path="/shop">
           <ShopPage />
+        </Route>
+        <Route path="/signin">
+          <Auth />
         </Route>
       </Switch>
     </AppWraper>
