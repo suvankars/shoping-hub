@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import SignIn from '../../components/signin'
-const Auth = () => {
+const Auth = ({currentUser}: any) => {
     return (
         <AuthWrapper>
-            <SignIn/>
+            <SignIn currentUser={currentUser}/>
         </AuthWrapper>
     )
 }

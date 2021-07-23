@@ -1,22 +1,31 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from '../assets/crown.svg'
+import logo from "../assets/crown.svg";
+import { auth } from "../firebase/firebase.utils";
 
-const Header = () => {
+const Header = ({ currentUser }: any) => {
+  console.log(currentUser);
   return (
     <HeaderWraper>
       <LogoWraper>
-          <Link to="/">
+        <Link to="/">
           <img src={logo} alt="Logo" />;
-          </Link>
+        </Link>
       </LogoWraper>
       <LinkOptionWraper>
         <OptionWraper>
-            <Link to="/shop">SHOP</Link>
+          <Link to="/shop">SHOP</Link>
         </OptionWraper>
         <OptionWraper>
-            <Link to="/contact">CONTACT</Link>
+          <Link to="/contact">CONTACT</Link>
         </OptionWraper>
+        {currentUser.currentUser ? (
+          <OptionWraper onClick={() => auth.signOut()}> SIGN OUT</OptionWraper>
+        ) : (
+          <OptionWraper>
+            <Link to="/signin">SIGN IN</Link>
+          </OptionWraper>
+        )}
       </LinkOptionWraper>
     </HeaderWraper>
   );

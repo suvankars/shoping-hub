@@ -4,12 +4,26 @@ import { Route, Switch } from "react-router";
 import ShopPage from "./pages/shop/shoppage";
 import styled from "styled-components";
 import Header from "./components/Header";
-import Auth from './pages/authentication/auth'
+import Auth from "./pages/authentication/auth";
+import { auth } from "./firebase/firebase.utils";
+import React, { useEffect, useState } from "react";
+interface IUser {
+  currentUser: any;
+}
 
 export const App = () => {
+  const [currentUser, setCurrentUser] = useState<IUser>({ currentUser: null });
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setCurrentUser({ currentUser: user });
+    });
+    console.log(currentUser);
+  }, []);
+
   return (
     <AppWraper>
-      <Header />
+      <Header currentUser={currentUser} />
       <Switch>
         <Route exact path="/">
           <Home />
@@ -18,7 +32,7 @@ export const App = () => {
           <ShopPage />
         </Route>
         <Route path="/signin">
-          <Auth />
+          <Auth currentUser={currentUser}/>
         </Route>
       </Switch>
     </AppWraper>
@@ -30,6 +44,10 @@ const AppWraper = styled.div`
   a {
     text-decoration: none;
     color: black;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 `;
 

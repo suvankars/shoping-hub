@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import FromInput from '../components/FormInput'
-import Button from '../components/button'
-const SignIn = () => {
+import FromInput from "../components/FormInput";
+import Button from "../components/button";
+import { signinWithGoogle } from "../../src/firebase/firebase.utils";
+import styled from "styled-components";
+const SignIn = ({ currentUser }: any) => {
   const initialValues = {
     email: "",
     password: "",
@@ -17,17 +19,16 @@ const SignIn = () => {
   const onChangeHandler = (e: any) => {
     e.preventDefault();
     const { value } = e.target;
-    const name = e.target.getAttribute('name')
+    const name = e.target.getAttribute("name");
 
     setValues({
       ...values,
       [name]: value,
     });
-   
   };
 
   return (
-    <div style={{width: '30vw', display: 'flex', flexDirection: 'column'}}>
+    <div style={{ width: "30vw", display: "flex", flexDirection: "column" }}>
       <form onSubmit={onSubmitHandler}>
         <FromInput
           name="email"
@@ -45,14 +46,31 @@ const SignIn = () => {
           value={values.password}
           required
         />
-        <Button type="submit">
-            Sign in
-        </Button>
-        
+        {currentUser.currentUser ? (
+          <div />
+        ) : (
+          <ButtonWraper>
+            <Button type="submit">Sign in</Button>
+            <Button onClick={signinWithGoogle}>Sign in With Google</Button>
+          </ButtonWraper>
+        )}
       </form>
     </div>
   );
 };
 
-export default SignIn;
+export const ButtonWraper = styled.div`
+  width: 380px;
+  display: flex;
+  flex-direction: column;
 
+  .title {
+    margin: 10px 0;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+export default SignIn;
